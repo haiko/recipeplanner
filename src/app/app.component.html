@@ -1,3 +1,35 @@
 <h1>
-  {{title}}
+  Recepten Planner
 </h1>
+<div>
+<md-card class="demo-card demo-basic">
+  <md-toolbar color="secondary">Voeg recept toe voor de komende week</md-toolbar>
+    <form>
+          <md-icon>restaurant</md-icon>
+          <md-input placeholder="Vul naam recept in" type="text"></md-input>
+
+          <md-icon>language</md-icon>
+          <md-input placeholder="Vul url in" style="min-width: 401px"  type="text"></md-input>
+
+        <md-icon>date_range</md-icon>
+        <select>
+          <option >Zaterdag</option>
+          <option >Zondag</option>
+          <option >Maandag</option>
+          <option >Dinsdag</option>
+          <option >Woensdag</option>
+          <option >Donderdag</option>
+          <option >Vrijdag</option>
+        </select>
+      <button md-raised-button color="accent">Voeg toe</button>
+    </form>
+</md-card>
+</div>
+<div>
+<md-card class="demo-card demo-basic">
+  <md-toolbar color="secondary">Gekozen recepten komende week</md-toolbar>
+    <md-list>
+
+    </md-list>
+</md-card>
+</div>
