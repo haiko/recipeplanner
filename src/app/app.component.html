@@ -1,35 +1,41 @@
 <h1>
   Recepten Planner
 </h1>
-<div>
-<md-card class="demo-card demo-basic">
-  <md-toolbar color="secondary">Voeg recept toe voor de komende week</md-toolbar>
-    <form>
-          <md-icon>restaurant</md-icon>
-          <md-input placeholder="Vul naam recept in" type="text"></md-input>
-
-          <md-icon>language</md-icon>
-          <md-input placeholder="Vul url in" style="min-width: 401px"  type="text"></md-input>
-
-        <md-icon>date_range</md-icon>
-        <select>
-          <option >Zaterdag</option>
-          <option >Zondag</option>
-          <option >Maandag</option>
-          <option >Dinsdag</option>
-          <option >Woensdag</option>
-          <option >Donderdag</option>
-          <option >Vrijdag</option>
-        </select>
-      <button md-raised-button color="accent">Voeg toe</button>
-    </form>
-</md-card>
+<div class="row">
+  <div class="jumbotron col-lg-6">
+    <h2>Voeg recept toe voor de komende week</h2>
+  </div>
 </div>
-<div>
-<md-card class="demo-card demo-basic">
-  <md-toolbar color="secondary">Gekozen recepten komende week</md-toolbar>
-    <md-list>
+<div class="row">
+  <div class="col-lg-6">
+    <form [formGroup]="recipeEntryForm" novalidate (ngSubmit)="save(recipeEntryForm.value, recipeEntryForm.valid)">
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-cutlery" aria-hidden="true"></i></span>
+          <label for="title" class="sr-only">Titel</label>
+          <input class="form-control" placeholder="Vul naam recept in" type="text" formControlName="title" id="title"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"> <i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
+          <label for="url" class="sr-only"></label>
+          <input class="form-control" placeholder="Vul url in" style="min-width: 401px" type="text"
+                 formControlName="url" id="url"/>
+        </div>
+      </div>
 
-    </md-list>
-</md-card>
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" formControlName="date" ngbDatepicker
+                 #d="ngbDatepicker">
+          <div class="input-group-addon" (click)="d.toggle()">
+            <i class="fa fa-calendar-o" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-default" type="submit">Voeg toe</button>
+    </form>
+  </div>
 </div>
