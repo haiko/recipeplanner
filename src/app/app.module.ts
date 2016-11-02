@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
+import {RecipeEntryService} from "./recipe-entry.service";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { AppComponent } from './app.component';
     HttpModule,
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [RecipeEntryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {RecipeEntry} from "./recipe-entry.model";
+import {RecipeEntryService} from "./recipe-entry.service";
+import { Response} from "@angular/http";
 
 @Component({
   selector: 'app-root',
@@ -8,18 +10,17 @@ import {RecipeEntry} from "./recipe-entry.model";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'app works!';
 
   public recipeEntryForm:FormGroup;
 
   public submitted: boolean; // keep track on whether form is submitted
 
-  constructor(private _fb: FormBuilder) { } // form builder simplify form initialization
+  constructor(private _fb: FormBuilder, private recipeEntryService:RecipeEntryService) { } // form builder simplify form initialization
 
   ngOnInit() {
     this.recipeEntryForm= this._fb.group({
       title: ['', [<any>Validators.required]],
-      url: ['', [<any>Validators.required]],
+      url: ['', []],
       date: ['', [<any>Validators.required]]
     });
   }
@@ -32,6 +33,9 @@ export class AppComponent implements OnInit{
     // check if model is valid
     // if valid, call API to save recipeEntry
     console.log(model, isValid);
+
+    this.recipeEntryService.createRecipeEntry(new RecipeEntry(model.title, model.url, model.date)).
+    subscribe((r: Response) => {console.log(r)});
   }
 
 }
