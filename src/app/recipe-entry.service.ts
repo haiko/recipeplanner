@@ -12,7 +12,7 @@ export class RecipeEntryService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(recipeEntry);
-    return this.http.post('/recipeplanner/', body, headers).
+    return this.http.post('/recipeplanner/recipeEntry', body, options).
     map((res: Response) => res.json());
   }
 
