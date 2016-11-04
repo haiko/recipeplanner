@@ -1,0 +1,5 @@
+<ul class="list-group">
+  <li *ngFor="let recipeEntry of recipeEntries" class="list-group-item">
+    <a href="{{recipeEntry.url}}">{{recipeEntry.title}}</a> <span class="label label-info pull-right"><p>{{recipeEntry.date|date:'EEEE d MMMM'}}</p></span>
+  </li>
+</ul>

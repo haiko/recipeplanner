@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
-import 'rxjs/Rx';
+import {Observable} from "rxjs";
+import {RecipeEntry} from "./recipe-entry.model";
 
 
 @Injectable()
@@ -12,8 +13,18 @@ export class RecipeEntryService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(recipeEntry);
-    return this.http.post('/recipeplanner/recipeEntry', body, options).
-    map((res: Response) => res.json());
+    return this.http.post('/recipeplanner/recipeEntries', body, options);
+  }
+
+  getRecipes() : Observable<RecipeEntry[]> {
+
+    // ...using get request
+    return this.http.get('/recipeplanner/recipeEntries')
+    // ...and calling .json() on the response to return data
+      .map((res:Response) => res.json())
+      //...errors if any
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+
   }
 
 }
