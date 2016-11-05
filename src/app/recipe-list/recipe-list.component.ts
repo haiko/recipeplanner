@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RecipeEntryService} from "../recipe-entry.service";
 import {RecipeEntry} from "../recipe-entry.model";
 
@@ -14,13 +14,21 @@ export class RecipeListComponent implements OnInit {
   constructor(private recipeService:RecipeEntryService) { }
 
   ngOnInit() {
+    this.loadList();
+  }
+
+  loadList() {
     this.recipeService.getRecipes().subscribe(
       recipeEntries => this.recipeEntries = recipeEntries,
       err => {
         console.log(err);
       }
     )
+  }
 
+  removeEntry(recipeEntry:RecipeEntry){
+    console.log('remove:' + recipeEntry.title);
+    
   }
 
 }

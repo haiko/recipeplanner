@@ -1,15 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {RecipeEntry} from "./recipe-entry.model";
-import {RecipeEntryService} from "./recipe-entry.service";
-
+import {RecipeEntryService} from "./recipe-entry.service"
+import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
+
+  @ViewChild(RecipeListComponent)
+  private listComponent: RecipeListComponent;
 
   public recipeEntryForm:FormGroup;
 
@@ -25,6 +28,9 @@ export class AppComponent implements OnInit{
     });
   }
 
+  /**
+   * Save RecipeEntry.
+   */
   save(model: RecipeEntry, isValid: boolean) {
 
 
@@ -43,10 +49,15 @@ export class AppComponent implements OnInit{
         // clear model
         this.submitted = true; // set form submit to true
 
+        //reload list
+        this.listComponent.loadList();
+
        return res;
       }
     }).subscribe(
-      data => {console.log(data)},
+      data => {
+        console.log(data)
+      },
       err => {console.log(err)});
   }
 

@@ -1,5 +1,6 @@
 <ul class="list-group">
   <li *ngFor="let recipeEntry of recipeEntries" class="list-group-item">
-    <a href="{{recipeEntry.url}}">{{recipeEntry.title}}</a> <span class="label label-info pull-right"><p>{{recipeEntry.date|date:'EEEE d MMMM'}}</p></span>
+    <a href="{{recipeEntry.url}}" target="_blank">{{recipeEntry.title}}</a> <span class="label label-info pull-right"><p>{{recipeEntry.date|date:'EEEE d MMMM'}}</p></span>
+    <span (click)="removeEntry(recipeEntry)"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
   </li>
 </ul>
