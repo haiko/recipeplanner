@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
     // if valid, call API to save recipeEntry
     console.log(model, isValid);
 
-    this.recipeEntryService.createRecipeEntry(new RecipeEntry(model.title, model.url, model.date)).map(res => {
+    this.recipeEntryService.createRecipeEntry(new RecipeEntry( model.title, model.url, model.date)).map(res => {
       // If request fails, throw an Error that will be caught
       console.log(res);
       if (res.status != 201) {

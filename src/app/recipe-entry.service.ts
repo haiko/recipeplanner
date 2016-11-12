@@ -27,4 +27,10 @@ export class RecipeEntryService {
 
   }
 
+  removeRecipeEntry(entry:RecipeEntry){
+    return this.http.delete('/recipeplanner/recipeEntries/' + entry.date)
+      //...errors if any
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
 }

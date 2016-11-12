@@ -28,7 +28,12 @@ export class RecipeListComponent implements OnInit {
 
   removeEntry(recipeEntry:RecipeEntry){
     console.log('remove:' + recipeEntry.title);
-    
+    this.recipeService.removeRecipeEntry(recipeEntry).subscribe(
+      data => {
+        console.log(data)
+        this.loadList();
+      },
+      err => {console.log(err)}
+    );
   }
-
 }
