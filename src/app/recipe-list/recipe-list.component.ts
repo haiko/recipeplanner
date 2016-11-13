@@ -30,7 +30,6 @@ export class RecipeListComponent implements OnInit {
     console.log('remove:' + recipeEntry.title);
     this.recipeService.removeRecipeEntry(recipeEntry).subscribe(
       data => {
-        console.log(data)
         this.loadList();
       },
       err => {console.log(err)}

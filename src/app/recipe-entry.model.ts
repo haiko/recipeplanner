@@ -9,6 +9,6 @@ export class RecipeEntry {
   constructor(title:string, url:string, date:string){
     this.title = title;
     this.url = url;
-    this.date = moment(date).format('YYYY-MM-DD').toString();
+    this.date = moment(date).format('YYYY-MM-DD');
   }
 }

@@ -2,12 +2,12 @@
   Recepten Planner
 </h1>
 <div class="row">
-  <div class="jumbotron col-lg-6">
+  <div class="jumbotron col-lg-8">
     <h2>Voeg recept toe voor de komende week</h2>
   </div>
 </div>
 <div class="row">
-  <div class="col-lg-6" [hidden]="submitted">
+  <div class="col-lg-8" [hidden]="submitted">
     <form [formGroup]="recipeEntryForm" novalidate (ngSubmit)="save(recipeEntryForm.value, recipeEntryForm.valid)">
       <div class="form-group"
            [class.has-error]="!recipeEntryForm.controls.title.valid && !(recipeEntryForm.controls.title.pristine && !submitted)">
@@ -29,36 +29,30 @@
                  formControlName="url" id="url"/>
         </div>
       </div>
-
-      <div class="form-group"
-           [class.has-error]="!recipeEntryForm.controls.date.valid && !(recipeEntryForm.controls.date.pristine && !submitted)">
-        <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" formControlName="date" ngbDatepicker
-                 #d="ngbDatepicker">
-          <div class="input-group-addon" (click)="d.toggle()">
-            <i class="fa fa-calendar-o" aria-hidden="true"></i>
-          </div>
+      <div class="form-group">
+        <h4><span><i class="fa fa-calendar-o" aria-hidden="true"></i></span>&nbsp;Data</h4>
+        <div class="checkbox" *ngFor="let day of days">
+          <label>
+            <input type="checkbox" [(ngModel)]="day.checked"  value="{{day.date}}" formControlName="{{day.name}}">
+            {{day.date|date:'EEEE d MMMM'}}
+          </label>
         </div>
-        <span class="help-block"
-              *ngIf="!recipeEntryForm.controls.date.valid && !(recipeEntryForm.controls.date.pristine && !submitted)">
-              date is required.
-            </span>
       </div>
       <button class="btn btn-default" type="submit">Voeg toe</button>
     </form>
   </div>
-  <div class="col-lg-6" [hidden]="!submitted">
+  <div class="col-lg-8" [hidden]="!submitted">
     <h3 class="alert alert-success">Recept {{recipeEntryForm.controls.title.value}} toegevoegd!</h3>
     <button class="btn btn-default" type="button" (click)="resetForm()">Klaar</button>
   </div>
 </div>
 <div class="row">
-  <div class="col-lg-6">
-    <div class="jumbotron">
+  <div class="col-lg-8">
+    <div class="pageheader">
       <h3>Geplande recepten</h3>
     </div>
   </div>
-  <div class="col-lg-6">
-     <app-recipe-list></app-recipe-list>
+  <div class="col-lg-8">
+    <app-recipe-list></app-recipe-list>
   </div>
 </div>
