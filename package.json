@@ -5,6 +5,7 @@
   "angular-cli": {},
   "scripts": {
     "start": "ng serve --proxy-config proxy.conf.json",
+    "start ssl": "ng serve --proxy-config proxy.conf.json --ssl 1 --ssl-key '/home/haiko/Ontwikkeling/ssl/server.key' --ssl-cert '/home/haiko/Ontwikkeling/ssl/server.crt'",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
