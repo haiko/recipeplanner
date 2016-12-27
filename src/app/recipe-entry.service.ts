@@ -19,7 +19,9 @@ export class RecipeEntryService {
   getRecipes() : Observable<RecipeEntry[]> {
 
     // ...using get request
-    return this.http.get('/recipeplanner/recipeEntries')
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get('/recipeplanner/recipeEntries', options)
     // ...and calling .json() on the response to return data
       .map((res:Response) => res.json())
       //...errors if any

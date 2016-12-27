@@ -1,7 +1,9 @@
 {
   "/recipeplanner": {
-    "target": "http://localhost:8080",
+    "target": "https://recipeagenda.appspot.com",
+    "changeOrigin": true,
     "secure": false,
     "logLevel": "debug"
   }
 }
+
