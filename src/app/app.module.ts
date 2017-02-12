@@ -6,6 +6,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppComponent} from './app.component';
 import {RecipeEntryService} from "./recipe-entry.service";
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import { AUTH_PROVIDERS }      from 'angular2-jwt';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +21,7 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
     HttpModule,
     NgbModule.forRoot()
   ],
-  providers: [RecipeEntryService, { provide: LOCALE_ID, useValue: "nl-NL" }],
+  providers: [RecipeEntryService, { provide: LOCALE_ID, useValue: "nl-NL" }, AUTH_PROVIDERS],
   bootstrap: [AppComponent]
 })
 export class AppModule {

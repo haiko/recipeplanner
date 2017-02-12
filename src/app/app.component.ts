@@ -1,15 +1,26 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
+import {NgIf} from '@angular/common';
 import {RecipeEntry} from "./recipe-entry.model";
-import {RecipeEntryService} from "./recipe-entry.service"
+import {RecipeEntryService} from "./recipe-entry.service";
+import {AuthService} from './auth.service';
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import * as moment from 'moment';
 import {Observable} from "rxjs";
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers:[AuthService, RecipeEntryService]
+
 })
 export class AppComponent implements OnInit {
 
@@ -20,23 +31,23 @@ export class AppComponent implements OnInit {
 
   public submitted: boolean; // keep track on whether form is submitted
 
-  public days;
+  public days = [{date:moment(this.now).format('YYYY-MM-DD'), checked:false, name:'day0'},
+    {date:moment(this.now).add(1, 'd').format('YYYY-MM-DD'), checked:false, name:'day1'},
+    {date:moment(this.now).add(2, 'd').format('YYYY-MM-DD'), checked:false, name:'day2'},
+    {date:moment(this.now).add(3, 'd').format('YYYY-MM-DD'), checked:false, name:'day3'},
+    {date:moment(this.now).add(4, 'd').format('YYYY-MM-DD'), checked:false, name:'day4'},
+    {date:moment(this.now).add(5, 'd').format('YYYY-MM-DD'), checked:false, name:'day5'},
+    {date:moment(this.now).add(6, 'd').format('YYYY-MM-DD'), checked:false, name:'day6'}];
 
-  private now;
+  private now = new Date();
 
-  constructor(private _fb: FormBuilder, private recipeEntryService: RecipeEntryService) {
+
+
+  constructor(private _fb: FormBuilder, private recipeEntryService: RecipeEntryService, private auth:AuthService) {
   } // form builder simplify form initialization
 
-  ngOnInit() {
-    this.now = new Date();
-    this.days = [{date:moment(this.now).format('YYYY-MM-DD'), checked:false, name:'day0'},
-      {date:moment(this.now).add(1, 'd').format('YYYY-MM-DD'), checked:false, name:'day1'},
-      {date:moment(this.now).add(2, 'd').format('YYYY-MM-DD'), checked:false, name:'day2'},
-      {date:moment(this.now).add(3, 'd').format('YYYY-MM-DD'), checked:false, name:'day3'},
-      {date:moment(this.now).add(4, 'd').format('YYYY-MM-DD'), checked:false, name:'day4'},
-      {date:moment(this.now).add(5, 'd').format('YYYY-MM-DD'), checked:false, name:'day5'},
-      {date:moment(this.now).add(6, 'd').format('YYYY-MM-DD'), checked:false, name:'day6'}];
 
+  ngOnInit() {
       this.recipeEntryForm = this._fb.group({
         title: ['', [<any>Validators.required]],
         url: ['', []]
@@ -48,6 +59,16 @@ export class AppComponent implements OnInit {
         this.recipeEntryForm.addControl(this.days[i].name, new FormControl());
       }
   }
+
+  // search(term: string) {
+  //   if (term === '') {
+  //     return Observable.of([]);
+  //   }
+  //
+  //
+  //   return this.recipeEntryService.suggest(term)
+  //     .map(response => <string[]> response.json()[1]);
+  // }
 
   /**
    * Save RecipeEntry.
